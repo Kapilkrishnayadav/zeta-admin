@@ -46,7 +46,7 @@ export function Tables() {
 
     try {
       // Make POST request to backend API
-      const response = await fetch("http://localhost:3001/api/parking-list", {
+      const response = await fetch("https://zeta-4ohz.onrender.com/api/parking-list", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,7 +143,7 @@ export function Tables() {
       var deleteData=state.selectedRows;
       console.log(deleteData);
       try {
-        const response = await fetch('http://localhost:3001/api/parking-list', {
+        const response = await fetch('https://zeta-4ohz.onrender.com/api/parking-list', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
