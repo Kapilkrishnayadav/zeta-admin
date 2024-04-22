@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
+const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
     // const [addVendorModalForm, setAddVendorModalForm] = useState(false)
   
   return (
@@ -8,18 +8,18 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
           <section className="flex justify-center items-center   p-6 mx-auto bg-gray-700 rounded-md shadow-md">
             <div>
               <p className="border-b-2 w-[18rem] border-[#10b981] pb-2 mb-8 text-center  text-xl font-bold text-gray-300 capitalize ">
-                Add Vendor
+                Add Parking 
               </p>
 
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    First Name
+                    Name
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) => (prev = { ...prev, firstName: e.target.value })
+                        (prev) => (prev = { ...prev, name: e.target.value })
                       )
                     }
                     id="title"
@@ -32,12 +32,12 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
 
                 <div className="Title__ my-1 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Last Name
+                    Latitide
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) => (prev = { ...prev, lastName: e.target.value })
+                        (prev) => (prev = { ...prev, lat: e.target.value })
                       )
                     }
                     id="title"
@@ -52,12 +52,12 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Date Of Birth
+                    Longitude
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) => (prev = { ...prev, dateOfBirth: e.target.value })
+                        (prev) => (prev = { ...prev, long: e.target.value })
                       )
                     }
                     id="title"
@@ -70,12 +70,12 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
 
                 <div className="Title__ my-1 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Email
+                    Address
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) => (prev = { ...prev, email: e.target.value })
+                        (prev) => (prev = { ...prev, address: e.target.value })
                       )
                     }
                     id="title"
@@ -90,12 +90,12 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Phone Number
+                    Rating
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) => (prev = { ...prev, phoneNumber: e.target.value })
+                        (prev) => (prev = { ...prev, rating: e.target.value })
                       )
                     }
                     id="title"
@@ -107,39 +107,14 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
                 </div>
 
                 <div className="Title__ my-1 ">
-                
-                  <label className="text-lg text-gray-300 " htmlFor="gender">Gender:</label>
-                  <select className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring" id="gender" name="gender"
-                  onChange={(e) =>
-                    setSubmitData(
-                      (prev) =>
-                        (prev = { ...prev, gender: e.target.value })
-                    )
-                  }
-                  >
-                      <option value=""  disabled selected hidden>select</option>
-                      <option value="male">male</option>
-                      <option value="female">female</option>
-                    </select>
-                  
-                </div>
-                {/* <label for="gender">Gender:</label>
-                    <select id="gender" name="gender">
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                    </select> */}
-              </div>
-
-              <div className="flex">
-                <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Password
+                    Rate Per Hour
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
                         (prev) =>
-                          (prev = { ...prev, password: e.target.value })
+                          (prev = { ...prev, perhourRate: e.target.value })
                       )
                     }
                     id="title"
@@ -148,15 +123,13 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
                     className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
                     required
                   />
-            </div>
-                    
+                </div>
               </div>
-               
 
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Image url
+                    Close time
                   </label>
                   <input
                     onChange={(e) =>
@@ -171,9 +144,70 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
                     className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
                     required
                   />
-            </div>
-            
+                </div>
+
+                <div className="Title__ my-1 ">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                    Open time
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) => (prev = { ...prev, opentime: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                  />
+                </div>
+
+                    
+
+
               </div>
+              <div className="flex">
+
+                <div className="Title__ my-1 mr-8 ">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                    Vendor ID
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) => (prev = { ...prev, vendorId: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                    />
+                </div>
+
+              <div className="Title__ my-1 ">
+                <label className="text-lg text-gray-300 " htmlFor="title">
+                  Description
+                </label>
+                <textarea
+                  onChange={(e) =>
+                    setSubmitData(
+                      (prev) =>
+                      (prev = { ...prev, description: e.target.value })
+                    )
+                  }
+                  id="title"
+                  placeholder="Enter Title"
+                  type="text"
+                  className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                  required
+                  />
+              </div>
+                  </div>
+
               <div className="flex justify-between">
                 <div className="product__button flex justify-end mt-6">
                   <button
@@ -202,4 +236,4 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
   )
 }
 
-export default AddVendorModal
+export default AddParkingModal

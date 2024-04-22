@@ -19,7 +19,7 @@ import "../public/css/tailwind.css";
 import {createBrowserRouter,createRoutesFromElements,RouterProvider,} from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <MaterialTailwindControllerProvider>
@@ -27,5 +27,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </MaterialTailwindControllerProvider>
       </ThemeProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
