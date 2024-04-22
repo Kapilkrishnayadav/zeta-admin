@@ -58,7 +58,7 @@ export function ParkingList() {
 
     try {
       // Make POST request to backend API
-      const response = await fetch("http://localhost:3001/api/parking-list", {
+      const response = await fetch("https://zeta-4ohz.onrender.com/api/parking-list", {
         method: "POST",
         headers: {
           
@@ -143,7 +143,7 @@ export function ParkingList() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            "http://localhost:3001/api/parking-list"
+            "https://zeta-4ohz.onrender.com/api/parking-list"
           );
           if (!response.ok) {
             throw new Error("Failed to fetch data");
@@ -167,7 +167,7 @@ export function ParkingList() {
     const handleDelete = async() => {
       console.log(deleteData);
       try {
-        const response = await fetch('http://localhost:3001/api/parking-list', {
+        const response = await fetch('https://zeta-4ohz.onrender.com/api/parking-list', {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

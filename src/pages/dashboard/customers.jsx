@@ -63,7 +63,7 @@ export function Customers() {
 
       try {
         const response = await fetch(
-          "http://localhost:3001/api/all-registers?user=customer"
+          "https://zeta-4ohz.onrender.com/api/all-registers?user=customer"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -86,7 +86,7 @@ export function Customers() {
 
    try {
      // Make POST request to backend API
-     const response = await fetch("http://localhost:3001/api/register", {
+     const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
        method: "POST",
        headers: {
          
@@ -114,7 +114,7 @@ export function Customers() {
  
   const handleDelete=(async()=>{
     try {
-      const response = await fetch('http://localhost:3001/api/register', {
+      const response = await fetch('https://zeta-4ohz.onrender.com/api/register', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

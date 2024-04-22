@@ -101,7 +101,7 @@ export function BookParking() {
 
       try {
         const response = await fetch(
-          "http://localhost:3001/api/get-all-book-parking"
+          "https://zeta-4ohz.onrender.com/api/get-all-book-parking"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
