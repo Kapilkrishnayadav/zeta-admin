@@ -1,6 +1,8 @@
 import React from "react";
 import { useState,useEffect } from "react";
+import { io } from "socket.io-client";
 import DataTable from "react-data-table-component"
+import { data } from "autoprefixer";
 // import {
 //   Typography,
 //   Card,
@@ -94,6 +96,26 @@ export function BookParking() {
      
 
    ]
+
+   const [events, setEvents] = useState([]);
+   const socket = io('http://localhost:3001',{
+    withCredentials: true,
+  }); // Connect to your server
+
+   useEffect(() => {
+       socket.on('adminEvent', handleAdminEvent);
+      //  socket.emit("customerEvent", { message: "Hello from the client!" });
+      console.log(data)
+       return () => {
+           socket.off('adminEvent', handleAdminEvent);
+       };
+   }, []); // On
+   const handleAdminEvent = (data) => {
+    console.log(data)
+    // setEvents((prevEvents) => [...prevEvents, data]);
+};
+
+
 
 
   useEffect(() => {
