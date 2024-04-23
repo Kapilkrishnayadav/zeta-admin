@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -18,15 +19,33 @@ export function Sidenav({ brandImg, brandName, routes }) {
     transparent: "bg-transparent",
   };
 
+  function extractToken(cookieString) {
+    const cookies = cookieString.split(';'); // Split into individual cookies
+    for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('='); // Split each cookie into name-value pair
+        if (name === 'token') { // Check if the name matches the token cookie
+            return value;
+        }
+    }
+    return null; // If token cookie not found, return null
+  }
+
+  const [token, setToken] = useState(false);
+
+  useEffect(() => {
+    const tokenValue = extractToken(document.cookie);
+    if (tokenValue) {
+      setToken(true);
+    }
+  }, []);
+
   return (
     <aside
       className={`${sidenavTypes[sidenavType]} ${
         openSidenav ? "translate-x-0" : "-translate-x-80"
       } fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 border border-blue-gray-100`}
     >
-      <div
-        className={`relative`}brandName
-      >
+      <div className="relative">
         <Link to="/" className="py-6 px-8 text-center">
           <Typography
             variant="h6"
@@ -49,34 +68,35 @@ export function Sidenav({ brandImg, brandName, routes }) {
       <div className="m-4">
         {routes.map(({ layout, title, pages }, key) => (
           <ul key={key} className="mb-4 flex flex-col gap-1">
-           
             {pages.map(({ icon, name, path }) => (
-              <li key={name}>
-                <NavLink to={`/${layout}${path}`}>
-                  {({ isActive }) => (
-                    <Button
-                      variant={isActive ? "gradient" : "text"}
-                      color={
-                        isActive
-                          ? sidenavColor
-                          : sidenavType === "dark"
-                          ? "white"
-                          : "blue-gray"
-                      }
-                      className="flex items-center gap-4 px-4 capitalize"
-                      fullWidth
-                    >
-                      {icon}
-                      <Typography
-                        color="inherit"
-                        className="font-medium capitalize"
+              (token && name === "sign in") ? null : (
+                <li key={name}>
+                  <NavLink to={`/${layout}${path}`}>
+                    {({ isActive }) => (
+                      <Button
+                        variant={isActive ? "gradient" : "text"}
+                        color={
+                          isActive
+                            ? sidenavColor
+                            : sidenavType === "dark"
+                            ? "white"
+                            : "blue-gray"
+                        }
+                        className="flex items-center gap-4 px-4 capitalize"
+                        fullWidth
                       >
-                        {name}
-                      </Typography>
-                    </Button>
-                  )}
-                </NavLink>
-              </li>
+                        {icon}
+                        <Typography
+                          color="inherit"
+                          className="font-medium capitalize"
+                        >
+                          {name}
+                        </Typography>
+                      </Button>
+                    )}
+                  </NavLink>
+                </li>
+              )
             ))}
           </ul>
         ))}
