@@ -60,21 +60,21 @@ export function Customers() {
  // const [addVendorModal, setaddVendorModal] = useState(false)
   const [addVendorModalForm, setAddVendorModalForm] = useState(false)
 
-  const [events, setEvents] = useState([]);
-  const socket = io('http://localhost:3001',{
-   withCredentials: true,
- }); // Connect to your server
+  // const [events, setEvents] = useState([]);
+//   const socket = io('http://localhost:3001',{
+//    withCredentials: true,
+//  }); // Connect to your server
 
-  useEffect(() => {
-      // socket.on('adminEvent', handleAdminEvent);
-      socket.emit("customerEvent", { message: "Hello from the client!" });
-      return () => {
-          socket.off('customerEvent', handleAdminEvent);
-      };
-  }, []); // On
-  const handleAdminEvent = (data) => {
-   setEvents((prevEvents) => [...prevEvents, data]);
-};
+//   useEffect(() => {
+//       // socket.on('adminEvent', handleAdminEvent);
+//       socket.emit("customerEvent", { message: "Hello from the client!" });
+//       return () => {
+//           socket.off('customerEvent', handleAdminEvent);
+//       };
+//   }, []); // On
+//   const handleAdminEvent = (data) => {
+//    setEvents((prevEvents) => [...prevEvents, data]);
+// };
 
 
 
@@ -159,13 +159,14 @@ export function Customers() {
   const column=[
    {
      name:"Customer ID",
-     selector: row => row._id
+     selector: row => row._id,
+     sortable:true
 
    },
    {
      name:"profilePhoto",
-     selector: row => row.profilePhoto
-
+     selector: row => row.profilePhoto,
+     sortable:true 
    },
    {
      name:"firstName",
@@ -174,7 +175,8 @@ export function Customers() {
     },
     {
       name:"lastName",
-      selector: row => row.lastName
+      selector: row => row.lastName,
+      sortable:true
     },
     {
       name:"dateOfBirth",
@@ -199,7 +201,8 @@ export function Customers() {
      },
     {
       name:"password",
-      selector: row => row.password
+      selector: row => row.password,
+      sortable:true
     }
     
 

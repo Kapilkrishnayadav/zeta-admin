@@ -162,7 +162,7 @@ const AddVendorModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
                     onChange={(e) =>
                       setSubmitData(
                         (prev) =>
-                          (prev = { ...prev, closeTime: e.target.value })
+                          (prev = { ...prev, profilePhoto: e.target.value })
                       )
                     }
                     id="title"

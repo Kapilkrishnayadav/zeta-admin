@@ -51,12 +51,14 @@ export function BookParking() {
   const column=[
     {
       name:"Booking Id",
-      selector: row => row._id
+      selector: row => row._id,
+      sortable:true
 
     },
     {
       name:"vehicle Type",
-      selector: row => row.typeOfVehicle
+      selector: row => row.typeOfVehicle,
+      sortable:true
 
     },
     {
@@ -66,7 +68,8 @@ export function BookParking() {
      },
      {
        name:"Start Date Time",
-       selector: row => row.startDateTime
+       selector: row => row.startDateTime,
+       sortable:true
      },
      {
        name:"End Date Time",
@@ -91,29 +94,30 @@ export function BookParking() {
       },
      {
        name:"Customer Id",
-       selector: row => row.userId
+       selector: row => row.userId,
+       sortable:true
      }
      
 
    ]
 
-   const [events, setEvents] = useState([]);
-   const socket = io('http://localhost:3001',{
-    withCredentials: true,
-  }); // Connect to your server
+//    const [events, setEvents] = useState([]);
+//    const socket = io('http://localhost:3001',{
+//     withCredentials: true,
+//   }); // Connect to your server
 
-   useEffect(() => {
-       socket.on('adminEvent', handleAdminEvent);
-      //  socket.emit("customerEvent", { message: "Hello from the client!" });
-      console.log(data)
-       return () => {
-           socket.off('adminEvent', handleAdminEvent);
-       };
-   }, []); // On
-   const handleAdminEvent = (data) => {
-    console.log(data)
-    // setEvents((prevEvents) => [...prevEvents, data]);
-};
+//    useEffect(() => {
+//        socket.on('adminEvent', handleAdminEvent);
+//       //  socket.emit("customerEvent", { message: "Hello from the client!" });
+//       console.log(data)
+//        return () => {
+//            socket.off('adminEvent', handleAdminEvent);
+//        };
+//    }, []); // On
+//    const handleAdminEvent = (data) => {
+//     console.log(data)
+//     // setEvents((prevEvents) => [...prevEvents, data]);
+// };
 
 
 

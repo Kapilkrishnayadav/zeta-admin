@@ -38,14 +38,14 @@ export function Vendors() {
   const [deleteData, setDeleteData] = useState([])
    const [submitData, setSubmitData] = useState({
     
-    profilePhoto: "wesdsd",
-     firstName: "kapil",
-     lastName: "krishna",
-     dateOfBirth: "1990-01-01",
-     email: "kapil@example104.com",
-     phoneNumber: "1234567890",
-     gender: "male",
-     password: "password123",
+    profilePhoto: "",
+     firstName: "",
+     lastName: "",
+     dateOfBirth: "",
+     email: "",
+     phoneNumber: "",
+     gender: "",
+     password: "",
      isVendor: true
   });
   // const [addVendorModal, setaddVendorModal] = useState(false)
@@ -78,7 +78,7 @@ export function Vendors() {
 
     try {
       // Make POST request to backend API
-      const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
+      const response = await fetch("http://localhost:3001/api/register", {
         method: "POST",
         headers: {
           
@@ -96,10 +96,10 @@ export function Vendors() {
         window.location.reload()
       } else {
         // Handle error, e.g., show error message
-        console.error("Failed to create parking entry:", response.statusText);
+        console.error("Failed to create vendor:", response.statusText);
       }
     } catch (error) {
-      console.error("Error creating parking entry:", error);
+      console.error("Error creating vendor:", error);
       // Handle error, e.g., show error message
     }
   };
@@ -131,13 +131,14 @@ export function Vendors() {
    const column=[
     {
       name:"Vendor ID",
-      selector: row => row._id
+      selector: row => row._id,
+      sortable:true
 
     },
     {
       name:"profilePhoto",
-      selector: row => row.profilePhoto
-
+      selector: row => row.profilePhoto,
+      sortable:true
     },
     {
       name:"firstName",
@@ -146,7 +147,8 @@ export function Vendors() {
      },
      {
        name:"lastName",
-       selector: row => row.lastName
+       selector: row => row.lastName,
+       sortable:true
      },
      {
        name:"dateOfBirth",
@@ -171,7 +173,8 @@ export function Vendors() {
       },
      {
        name:"password",
-       selector: row => row.password
+       selector: row => row.password,
+       sortable:true
      }
      
 

@@ -86,18 +86,18 @@ export function ParkingList() {
    const column=[
     {
       name:"Parking Id",
-      selector: row => row._id
-
+      selector: row => row._id,
+      sortable:true
     },
     {
       name:"vendor Id",
-      selector: row => row.vendorId
-
+      selector: row => row.userId,
+      sortable:true
     }, 
     {
        name:"name",
-       selector: row => row.name
-
+       selector: row => row.name,
+       sortable:true
      },
      {
        name:"address",
@@ -106,7 +106,8 @@ export function ParkingList() {
       },
       {
         name:"opentime",
-        selector: row => row.opentime
+        selector: row => row.opentime,
+        sortable:true
       },
       {
         name:"closeTime",
@@ -131,19 +132,43 @@ export function ParkingList() {
       },
       {
         name:"perhourRate",
-        selector: row => row.perhourRate
+        selector: row => row.perhourRate,
+        sortable:true
       },
       {
         name:"rating",
-        selector: row => row.rating
+        selector: row => row.rating,
+        sortable:true
       }
 
     ]
+
+    function extractToken(cookieString) {
+      const cookies = cookieString.split(';'); // Split into individual cookies
+      for (const cookie of cookies) {
+          const [name, value] = cookie.trim().split('='); // Split each cookie into name-value pair
+          if (name === 'token') { // Check if the name matches the token cookie
+              return value;
+          }
+      }
+      return null; // If token cookie not found, return null
+  }
+    
+
+
     useEffect(() => {
+      const token = extractToken(document.cookie);
+      console.log(token);
+      const authHeader = `Bearer ${token}`;
       const fetchData = async () => {
         try {
           const response = await fetch(
-            "https://zeta-4ohz.onrender.com/api/parking-list"
+            "https://zeta-4ohz.onrender.com/api/parking-list",
+             {
+              headers: {
+                'Authorization': authHeader
+              }
+            }
           );
           if (!response.ok) {
             throw new Error("Failed to fetch data");
