@@ -146,7 +146,8 @@ export function ParkingList() {
     function extractToken(cookieString) {
       const cookies = cookieString.split(';'); // Split into individual cookies
       for (const cookie of cookies) {
-          const [name, value] = cookie.trim().split('='); // Split each cookie into name-value pair
+          const [name, value] = cookie.trim().split('='); 
+          // Split each cookie into name-value pair
           if (name === 'token') { // Check if the name matches the token cookie
               return value;
           }

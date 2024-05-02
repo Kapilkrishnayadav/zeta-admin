@@ -84,7 +84,7 @@ export function Vendors() {
       
     try {
       // Make POST request to backend API
-      const response = await fetch("http://localhost:3001/api/register", {
+      const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
         method: "POST",
         headers: {
           

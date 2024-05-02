@@ -61,7 +61,7 @@ export function Customers() {
   const [addVendorModalForm, setAddVendorModalForm] = useState(false)
 
   // const [events, setEvents] = useState([]);
-//   const socket = io('http://localhost:3001',{
+//   const socket = io('https://zeta-4ohz.onrender.com',{
 //    withCredentials: true,
 //  }); // Connect to your server
 
@@ -112,7 +112,7 @@ export function Customers() {
 
    try {
      // Make POST request to backend API
-     const response = await fetch("http://localhost:3001/api/register", {
+     const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
        method: "POST",
        headers: {
          
