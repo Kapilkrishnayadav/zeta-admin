@@ -66,7 +66,7 @@ export function ParkingList() {
     }
     try {
       // Make POST request to backend API
-      const response = await fetch("http://localhost:3001/api/parking-list", {
+      const response = await fetch("https://zeta-4ohz.onrender.com/api/parking-list", {
         method: "POST",
         headers: {
           
