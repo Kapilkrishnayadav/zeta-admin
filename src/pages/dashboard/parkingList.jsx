@@ -3,6 +3,7 @@ import { useEffect,useState } from "react";
 import DataTable from "react-data-table-component"
 // import AddVendorModal from "@/components/AddVendorModal";
 import AddVendorModal from "@/components/AddParkingModal";
+import { rating } from "@material-tailwind/react";
 
 
 
@@ -43,22 +44,29 @@ export function ParkingList() {
     lat: "",
     long: "",
     address: "",
-    perhourRate: "",
+    car_perhourRate: "",
+    bike_perhourRate: "",
+    bus_perhourRate: "",
+    miniTruck_perhourRate: "",
+    HCV_perhourRate: "",
+    LCV_perhourRate: "",
     description: "",
     rating: "",
-    saved: false, 
     opentime: "",
     closeTime: "",
-    vendorId:"",
-    _id:""
+    userId:"",
   });
    const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(submitData);
-
+    if(!name || !lat || !long || !address || !description || !rating || !opentime || !closeTime || !userId)
+    {
+      alert("fill all required fields")
+      return;
+    }
     try {
       // Make POST request to backend API
-      const response = await fetch("https://zeta-4ohz.onrender.com/api/parking-list", {
+      const response = await fetch("http://localhost:3001/api/parking-list", {
         method: "POST",
         headers: {
           
@@ -131,8 +139,33 @@ export function ParkingList() {
 
       },
       {
-        name:"perhourRate",
-        selector: row => row.perhourRate,
+        name:"Car perhourRate",
+        selector: row => row.car_perhourRate,
+        sortable:true
+      },
+      {
+        name:"Bike perhourRate",
+        selector: row => row.bike_perhourRate,
+        sortable:true
+      },
+      {
+        name:"Bus perhourRate",
+        selector: row => row.bus_perhourRate,
+        sortable:true
+      },
+      {
+        name:"Minitruck perhourRate",
+        selector: row => row.miniTruck_perhourRate,
+        sortable:true
+      },
+      {
+        name:"HCV perhourRate",
+        selector: row => row.HCV_perhourRate,
+        sortable:true
+      },
+      {
+        name:"LCV perhourRate",
+        selector: row => row.LCV_perhourRate,
         sortable:true
       },
       {

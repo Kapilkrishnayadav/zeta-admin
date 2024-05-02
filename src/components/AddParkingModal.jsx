@@ -4,17 +4,17 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
   
   return (
     <div>
-         <div className="Modal_container flex items-center h-[100vh] py-8  fixed top-0 left-[25vw]">
-          <section className="flex justify-center items-center   p-6 mx-auto bg-gray-700 rounded-md shadow-md">
+         <div className="Modal_container flex items-center h-[90vh] overflow-scroll py-8  fixed top-10 left-[25vw]">
+          <section className="flex justify-center items-center mt-72  p-6 mx-auto bg-gray-700 rounded-md shadow-md">
             <div>
-              <p className="border-b-2 w-[18rem] border-[#10b981] pb-2 mb-8 text-center  text-xl font-bold text-gray-300 capitalize ">
+              <p className="border-b-2 w-[18rem] border-[#10b981]  mb-8 text-center  text-xl font-bold text-gray-300 capitalize ">
                 Add Parking 
               </p>
 
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Name
+                    Name*
                   </label>
                   <input
                     onChange={(e) =>
@@ -32,7 +32,7 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
 
                 <div className="Title__ my-1 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Latitide
+                    Latitide*
                   </label>
                   <input
                     onChange={(e) =>
@@ -52,7 +52,7 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Longitude
+                    Longitude*
                   </label>
                   <input
                     onChange={(e) =>
@@ -70,7 +70,7 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
 
                 <div className="Title__ my-1 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Address
+                    Address*
                   </label>
                   <input
                     onChange={(e) =>
@@ -108,13 +108,13 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
 
                 <div className="Title__ my-1 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Rate Per Hour
+                    Car Rate Per Hour
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
                         (prev) =>
-                          (prev = { ...prev, perhourRate: e.target.value })
+                          (prev = { ...prev, car_perhourRate: e.target.value })
                       )
                     }
                     id="title"
@@ -129,13 +129,12 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Close time
+                  Bike Rate Per Hour
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) =>
-                          (prev = { ...prev, closeTime: e.target.value })
+                        (prev) => (prev = { ...prev, bike_perhourRate: e.target.value })
                       )
                     }
                     id="title"
@@ -148,7 +147,86 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
 
                 <div className="Title__ my-1 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Open time
+                   Bus Rate Per Hour
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) =>
+                          (prev = { ...prev, bus_perhourRate: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                  />
+                </div>
+              </div>
+
+            
+              <div className="flex">
+                <div className="Title__ my-1 mr-8">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                  Minitruck Rate Per Hour
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) => (prev = { ...prev, miniTruck_perhourRate: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                  />
+                </div>
+
+                <div className="Title__ my-1 ">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                   HCV Rate Per Hour
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) =>
+                          (prev = { ...prev, HCV_perhourRate: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="flex">
+              <div className="Title__ my-1 mr-8">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                   LCV Rate Per Hour
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) =>
+                          (prev = { ...prev, LCV_perhourRate: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                  />
+                </div>
+
+                <div className="Title__ my-1 ">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                    Open time*
                   </label>
                   <input
                     onChange={(e) =>
@@ -169,15 +247,32 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
 
               </div>
               <div className="flex">
-
-                <div className="Title__ my-1 mr-8 ">
+              <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
-                    Vendor ID
+                    Close time*
                   </label>
                   <input
                     onChange={(e) =>
                       setSubmitData(
-                        (prev) => (prev = { ...prev, vendorId: e.target.value })
+                        (prev) =>
+                          (prev = { ...prev, closeTime: e.target.value })
+                      )
+                    }
+                    id="title"
+                    placeholder="Enter Title"
+                    type="text"
+                    className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
+                    required
+                  />
+                </div>
+                <div className="Title__ my-1 mr-8 ">
+                  <label className="text-lg text-gray-300 " htmlFor="title">
+                    Vendor ID*
+                  </label>
+                  <input
+                    onChange={(e) =>
+                      setSubmitData(
+                        (prev) => (prev = { ...prev, userId: e.target.value })
                       )
                     }
                     id="title"
@@ -188,9 +283,10 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
                     />
                 </div>
 
+                  </div>
               <div className="Title__ my-1 ">
                 <label className="text-lg text-gray-300 " htmlFor="title">
-                  Description
+                  Description*
                 </label>
                 <textarea
                   onChange={(e) =>
@@ -206,7 +302,6 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
                   required
                   />
               </div>
-                  </div>
 
               <div className="flex justify-between">
                 <div className="product__button flex justify-end mt-6">
