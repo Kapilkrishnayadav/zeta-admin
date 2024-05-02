@@ -47,14 +47,14 @@ export function Customers() {
  const [deleteData, setDeleteData] = useState([])
   const [submitData, setSubmitData] = useState({
    
-   profilePhoto: "wesdsd",
-    firstName: "kapil",
-    lastName: "krishna",
-    dateOfBirth: "1990-01-01",
-    email: "kapil@example104.com",
-    phoneNumber: "1234567890",
-    gender: "male",
-    password: "password123",
+   profilePhoto: "",
+    firstName: "",
+    lastName: "",
+    dateOfBirth: "",
+    email: "",
+    phoneNumber: "",
+    gender: "",
+    password: "",
     isVendor: false
  });
  // const [addVendorModal, setaddVendorModal] = useState(false)
@@ -103,10 +103,16 @@ export function Customers() {
   const handleSubmit = async(e) => {
    e.preventDefault();
    console.log(submitData);
+   const {profilePhoto ,firstName,lastName,dateOfBirth,email,phoneNumber,gender,password} =submitData;
+   if(!profilePhoto || !firstName || !lastName|| !dateOfBirth || !email || !phoneNumber || !gender || !password)
+   {
+     alert("Fill all the fields");
+     return;
+   }
 
    try {
      // Make POST request to backend API
-     const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
+     const response = await fetch("http://localhost:3001/api/register", {
        method: "POST",
        headers: {
          
@@ -124,6 +130,9 @@ export function Customers() {
        window.location.reload()
      } else {
        // Handle error, e.g., show error message
+       const data = await response.json();
+           alert(data.error);
+           console.log(data);
        console.error("Failed to create parking entry:", response.statusText);
      }
    } catch (error) {

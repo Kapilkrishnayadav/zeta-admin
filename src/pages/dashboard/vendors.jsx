@@ -75,7 +75,13 @@ export function Vendors() {
    const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(submitData);
-
+    const {profilePhoto ,firstName,lastName,dateOfBirth,email,phoneNumber,gender,password} =submitData;
+    if(!profilePhoto || !firstName || !lastName|| !dateOfBirth || !email || !phoneNumber || !gender || !password)
+    {
+      alert("Fill all the fields");
+      return;
+    }
+      
     try {
       // Make POST request to backend API
       const response = await fetch("http://localhost:3001/api/register", {
@@ -96,6 +102,8 @@ export function Vendors() {
         window.location.reload()
       } else {
         // Handle error, e.g., show error message
+        const data = await response.json();
+        alert(data.error);
         console.error("Failed to create vendor:", response.statusText);
       }
     } catch (error) {
