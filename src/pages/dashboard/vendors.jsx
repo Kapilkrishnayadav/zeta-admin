@@ -2,6 +2,8 @@
 import { useEffect,useState } from "react";
 import DataTable from "react-data-table-component"
 import AddVendorModal from "@/components/AddVendorModal";
+import EditVendorModal from "@/components/EditVendorModal";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 
@@ -16,6 +18,7 @@ const customStyles = {
   headCells: {
     style: {
       fontSize: '14px',
+      width:'250px',
       textTransform: 'uppercase',
       // minWidth: '50%'
     },
@@ -23,7 +26,7 @@ const customStyles = {
   cells: {
     style: {
       fontSize: '14px',
-      width: '300px',
+      // width: '300px',
       padding: '8px 16px', // Adjust padding for cell content
       // minWidth: '50%'
     },
@@ -48,8 +51,21 @@ export function Vendors() {
      password: "",
      isVendor: true
   });
+  const [submitEditData, setSubmitEditData] = useState({
+    
+    profilePhoto: "",
+     firstName: "",
+     lastName: "",
+     dateOfBirth: "",
+     email: "",
+     phoneNumber: "",
+     gender: "",
+     password: "",
+     isVendor: true
+  });
   // const [addVendorModal, setaddVendorModal] = useState(false)
    const [addVendorModalForm, setAddVendorModalForm] = useState(false)
+   const [editVendorModalForm, setEditVendorModalForm] = useState(false)
   useEffect(() => {
      const fetchData = async () => {
 
@@ -112,6 +128,67 @@ export function Vendors() {
     }
   };
   
+  function extractToken(cookieString) {
+    const cookies = cookieString.split(';'); // Split into individual cookies
+    for (const cookie of cookies) {
+        const [name, value] = cookie.trim().split('='); 
+        // Split each cookie into name-value pair
+        if (name === 'token') { // Check if the name matches the token cookie
+            return value;
+        }
+    }
+    return null; // If token cookie not found, return null
+}
+  
+  const openEditForm=((row)=>{
+    setSubmitEditData({...submitEditData,...row});
+    setEditVendorModalForm(true)
+    
+  })
+  const handleSubmitEdit = async(e) => {
+    e.preventDefault();
+    console.log(submitEditData);
+    const {profilePhoto ,firstName,lastName,dateOfBirth,email,phoneNumber,gender,password} =submitEditData;
+    if(!profilePhoto || !firstName || !lastName|| !dateOfBirth || !email || !phoneNumber || !gender || !password)
+      {
+
+        alert("Fill all the fields");
+        return;
+      }
+      const token = extractToken(document.cookie);
+      console.log(token);
+      const authHeader = `Bearer ${token}`;
+      
+    try {
+      // Make POST request to backend API
+      const response = await fetch("https://zeta-4ohz.onrender.com/api/update-profile", {
+        method: "PUT",
+        headers: {
+          'Authorization': authHeader,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitEditData),
+      });
+
+      // Check if request was successful
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Parking entry updated successfully:", data);
+        setEditVendorModalForm(false);
+        // Handle success, e.g., show success message
+        window.location.reload()
+      } else {
+        // Handle error, e.g., show error message
+        const data = await response.json();
+        alert(data.error);
+        console.error("Failed to create vendor:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error creating vendor:", error);
+      // Handle error, e.g., show error message
+    }
+  };
+
    const handleDelete=(async()=>{
      try {
        const response = await fetch('https://zeta-4ohz.onrender.com/api/register', {
@@ -137,12 +214,24 @@ export function Vendors() {
   })
 
    const column=[
+     {
+       name:"Edit",
+       width:"100px",
+       cell: (row) => (
+     <div  >
+      <PencilIcon onClick={()=>openEditForm(row)} className="h-4 w-4 text-blue-500"/>
+     </div>
+   ),
+  
+  },
     {
       name:"Vendor ID",
       selector: row => row._id,
+      
       sortable:true
 
     },
+
     {
       name:"profilePhoto",
       selector: row => row.profilePhoto,
@@ -151,11 +240,13 @@ export function Vendors() {
     {
       name:"firstName",
        selector: row => row.firstName,
+       width:"155px",
        sortable:true
      },
      {
        name:"lastName",
        selector: row => row.lastName,
+       width:"155px",
        sortable:true
      },
      {
@@ -171,17 +262,20 @@ export function Vendors() {
      {
        name:"phoneNumber",
        selector: row => row.phoneNumber,
+       width:"155px",
        sortable:true
        
       },
       {
         name:"gender",
         selector: row => row.gender,
+        width:"125px",
         sortable:true
       },
      {
        name:"password",
        selector: row => row.password,
+       width:"155px",
        sortable:true
      }
      
@@ -227,6 +321,9 @@ export function Vendors() {
       ></DataTable>
       {
         addVendorModalForm?<AddVendorModal setAddVendorModalForm={setAddVendorModalForm} handleSubmit={handleSubmit} setSubmitData={setSubmitData} />:null
+      }
+      {
+        editVendorModalForm?<EditVendorModal setEditVendorModalForm={setEditVendorModalForm} handleSubmitEdit={handleSubmitEdit} setSubmitEditData={setSubmitEditData} submitEditData={submitEditData} />:null
       }
       </div>
     </>

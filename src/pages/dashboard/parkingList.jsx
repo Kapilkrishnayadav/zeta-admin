@@ -59,6 +59,8 @@ export function ParkingList() {
    const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(submitData);
+    const {name,lat,long,address,description,rating,opentime,closeTime,userId}=submitData
+
     if(!name || !lat || !long || !address || !description || !rating || !opentime || !closeTime || !userId)
     {
       alert("fill all required fields")
