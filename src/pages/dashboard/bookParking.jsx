@@ -173,8 +173,6 @@ export function BookParking() {
 <DataTable columns={column} data={records}
  customStyles={customStyles}
  pagination
- selectableRows
- expandableRows={true}
  onSelectedRowsChange={(e)=> setDeleteData(e.selectedRows) }
  ></DataTable>
     </div>
