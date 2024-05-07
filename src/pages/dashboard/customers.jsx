@@ -103,8 +103,8 @@ export function Customers() {
   const handleSubmit = async(e) => {
    e.preventDefault();
    console.log(submitData);
-   const {profilePhoto ,firstName,lastName,dateOfBirth,email,phoneNumber,gender,password} =submitData;
-   if(!profilePhoto || !firstName || !lastName|| !dateOfBirth || !email || !phoneNumber || !gender || !password)
+   const {firstName,lastName,dateOfBirth,email,phoneNumber,gender,password} =submitData;
+   if(!firstName || !lastName|| !dateOfBirth || !email || !phoneNumber || !gender || !password)
    {
      alert("Fill all the fields");
      return;
@@ -171,11 +171,6 @@ export function Customers() {
      selector: row => row._id,
      sortable:true
 
-   },
-   {
-     name:"profilePhoto",
-     selector: row => row.profilePhoto,
-     sortable:true 
    },
    {
      name:"firstName",
