@@ -1,6 +1,5 @@
 //  customers
  import React from "react";
- import { io } from "socket.io-client";
 import { useState,useEffect } from "react";
 import AddVendorModal from "@/components/AddVendorModal";
 import DataTable from "react-data-table-component"
