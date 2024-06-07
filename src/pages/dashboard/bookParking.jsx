@@ -3,6 +3,7 @@ import { useState,useEffect } from "react";
 import { io } from "socket.io-client";
 import DataTable from "react-data-table-component"
 import { data } from "autoprefixer";
+import CopyButton from "@/components/CopyButton";
 // import {
 //   Typography,
 //   Card,
@@ -30,13 +31,12 @@ const customStyles = {
     style: {
       fontSize: '14px',
       textTransform: 'uppercase',
-      // minWidth: '50%'
+      width:'150px'
     },
   },
   cells: {
     style: {
       fontSize: '14px',
-      width: '300px',
       padding: '8px 16px', // Adjust padding for cell content
       // minWidth: '50%'
     },
@@ -52,9 +52,21 @@ export function BookParking() {
     {
       name:"Booking Id",
       selector: row => row._id,
+      width:"220px",
       sortable:true
 
     },
+    {
+      name:"copy",
+      cell: (row) => (
+        <div  >
+      <CopyButton text={row._id}/>
+    
+    </div>
+  ),
+  width:"100px",
+  
+  },
     {
       name:"vehicle Type",
       selector: row => row.typeOfVehicle,
@@ -64,16 +76,19 @@ export function BookParking() {
     {
       name:"Vehicle No",
        selector: row => row.vehicleNo,
+       width:"200px",
        sortable:true
      },
      {
        name:"Start Date Time",
        selector: row => row.startDateTime,
+       width:"250px",
        sortable:true
      },
      {
        name:"End Date Time",
        selector: row => row.endDateTime,
+       width:"250px",
        sortable:true
      },
      {
@@ -84,19 +99,44 @@ export function BookParking() {
      {
        name:"Parking ID",
        selector: row => row.parkingId,
+       width:"220px",
        sortable:true
        
       },
       {
+        name:"copy",
+        width:"100px",
+        cell: (row) => (
+      <div  >
+        <CopyButton text={row.parkingId}/>
+      
+      </div>
+    ),
+    
+    },
+      {
         name:"Status",
         selector: row => row.status,
+        width:"150px",
         sortable:true
       },
      {
        name:"Customer Id",
        selector: row => row.userId,
+       width:"220px",
        sortable:true
-     }
+     },
+     {
+      name:"copy",
+      width:"100px",
+      cell: (row) => (
+    <div  >
+      <CopyButton text={row.userId}/>
+    
+    </div>
+  ),
+  
+  },
      
 
    ]
@@ -127,12 +167,13 @@ export function BookParking() {
 
       try {
         const response = await fetch(
-          "https://zeta-4ohz.onrender.com/api/get-all-book-parking"
+          `${import.meta.env.VITE_BACKEND_URL}/api/get-all-book-parking`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const jsonData = await response.json();
+        jsonData.reverse();
         setRecords(jsonData);
         setFilterRecords(jsonData);
         console.log(jsonData)
@@ -175,6 +216,7 @@ export function BookParking() {
  pagination
  onSelectedRowsChange={(e)=> setDeleteData(e.selectedRows) }
  ></DataTable>
+ 
     </div>
   );
 }

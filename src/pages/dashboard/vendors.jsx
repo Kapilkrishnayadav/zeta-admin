@@ -4,6 +4,7 @@ import DataTable from "react-data-table-component"
 import AddVendorModal from "@/components/AddVendorModal";
 import EditVendorModal from "@/components/EditVendorModal";
 import { PencilIcon } from "@heroicons/react/24/solid";
+import CopyButton from "@/components/CopyButton";
 import { Link } from "react-router-dom";
 
 
@@ -18,7 +19,7 @@ const customStyles = {
   headCells: {
     style: {
       fontSize: '14px',
-      width:'250px',
+      width:'150px',
       textTransform: 'uppercase',
       // minWidth: '50%'
     },
@@ -39,6 +40,8 @@ export function Vendors() {
    const [filterRecords, setFilterRecords] = useState([])
    const [filterBy, setFilterBy] = useState("_id");
   const [deleteData, setDeleteData] = useState([])
+
+  
    const [submitData, setSubmitData] = useState({
     
     profilePhoto: "",
@@ -71,12 +74,13 @@ export function Vendors() {
 
        try {
          const response = await fetch(
-           "https://zeta-4ohz.onrender.com/api/all-registers?user=vendor"
+           `${import.meta.env.VITE_BACKEND_URL}/api/all-registers?user=vendor`
          );
          if (!response.ok) {
            throw new Error("Failed to fetch data");
          }
          const jsonData = await response.json();
+         jsonData.reverse();
          setRecords(jsonData);
          setFilterRecords(jsonData);
          console.log(jsonData)
@@ -100,7 +104,7 @@ export function Vendors() {
       
     try {
       // Make POST request to backend API
-      const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
         method: "POST",
         headers: {
           
@@ -141,13 +145,14 @@ export function Vendors() {
 }
   
   const openEditForm=((row)=>{
+    console.log(row);
     setSubmitEditData({...submitEditData,...row});
     setEditVendorModalForm(true)
     
   })
   const handleSubmitEdit = async(e) => {
     e.preventDefault();
-    console.log(submitEditData);
+    // console.log(submitEditData);
     const {profilePhoto ,firstName,lastName,dateOfBirth,email,phoneNumber,gender,password} =submitEditData;
     if(!profilePhoto || !firstName || !lastName|| !dateOfBirth || !email || !phoneNumber || !gender || !password)
       {
@@ -161,7 +166,7 @@ export function Vendors() {
       
     try {
       // Make POST request to backend API
-      const response = await fetch("https://zeta-4ohz.onrender.com/api/update-profile", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/update-profile`, {
         method: "PUT",
         headers: {
           'Authorization': authHeader,
@@ -191,7 +196,7 @@ export function Vendors() {
 
    const handleDelete=(async()=>{
      try {
-       const response = await fetch('https://zeta-4ohz.onrender.com/api/register', {
+       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
          method: 'DELETE',
          headers: {
            'Content-Type': 'application/json',
@@ -227,10 +232,21 @@ export function Vendors() {
     {
       name:"Vendor ID",
       selector: row => row._id,
-      
+      width:"235px",
       sortable:true
 
     },
+    {
+      name:"copy",
+      width:"100px",
+      cell: (row) => (
+    <div  >
+      <CopyButton text={row._id}/>
+    
+    </div>
+  ),
+ 
+ },
     {
       name:"firstName",
        selector: row => row.firstName,
@@ -246,11 +262,13 @@ export function Vendors() {
      {
        name:"dateOfBirth",
        selector: row => row.dateOfBirth,
+       width:"155px",
        sortable:true
      },
      {
        name:"email",
        selector: row => row.email,
+       width:"250px",
        sortable:true
      },
      {
@@ -269,7 +287,7 @@ export function Vendors() {
      {
        name:"password",
        selector: row => row.password,
-       width:"155px",
+       width:"150px",
        sortable:true
      }
      
@@ -319,6 +337,8 @@ export function Vendors() {
       {
         editVendorModalForm?<EditVendorModal setEditVendorModalForm={setEditVendorModalForm} handleSubmitEdit={handleSubmitEdit} setSubmitEditData={setSubmitEditData} submitEditData={submitEditData} />:null
       }
+      
+
       </div>
     </>
   );

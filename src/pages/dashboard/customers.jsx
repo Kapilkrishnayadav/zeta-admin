@@ -4,7 +4,10 @@
 import { useState,useEffect } from "react";
 import AddVendorModal from "@/components/AddVendorModal";
 import DataTable from "react-data-table-component"
+import TimePick from "@/components/TimePick";
+import CopyButton from "@/components/CopyButton";
 // import {
+
 //   Typography,
 //   Alert,
 //   Card,
@@ -31,7 +34,7 @@ const customStyles = {
   cells: {
     style: {
       fontSize: '14px',
-      width: '300px',
+      width: '200px',
       padding: '8px 16px', // Adjust padding for cell content
       // minWidth: '50%'
     },
@@ -83,12 +86,13 @@ export function Customers() {
 
       try {
         const response = await fetch(
-          "https://zeta-4ohz.onrender.com/api/all-registers?user=customer"
+          `${import.meta.env.VITE_BACKEND_URL}/api/all-registers?user=customer`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const jsonData = await response.json();
+        jsonData.reverse();
         setRecords(jsonData);
         setFilterRecords(jsonData);
         console.log(jsonData)
@@ -112,7 +116,7 @@ export function Customers() {
 
    try {
      // Make POST request to backend API
-     const response = await fetch("https://zeta-4ohz.onrender.com/api/register", {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/register`, {
        method: "POST",
        headers: {
          
@@ -143,7 +147,7 @@ export function Customers() {
  
   const handleDelete=(async()=>{
     try {
-      const response = await fetch('https://zeta-4ohz.onrender.com/api/register', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/register`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -169,43 +173,62 @@ export function Customers() {
    {
      name:"Customer ID",
      selector: row => row._id,
+     width:"220px",
      sortable:true
 
    },
    {
+    name:"copy",
+    width:"100px",
+    cell: (row) => (
+  <div  >
+    <CopyButton text={row._id}/>
+  
+  </div>
+),
+
+},
+   {
      name:"firstName",
       selector: row => row.firstName,
+      width:"200px",
       sortable:true
     },
     {
       name:"lastName",
       selector: row => row.lastName,
+      width:"200px",
       sortable:true
     },
     {
       name:"dateOfBirth",
       selector: row => row.dateOfBirth,
+      width:"250px",
       sortable:true
     },
     {
       name:"email",
       selector: row => row.email,
+      width:"250px",
       sortable:true
     },
     {
       name:"phoneNumber",
       selector: row => row.phoneNumber,
+      width:"200px",
       sortable:true
       
      },
      {
        name:"gender",
        selector: row => row.gender,
+       width:"150px",
        sortable:true
      },
     {
       name:"password",
       selector: row => row.password,
+      width:"150px",
       sortable:true
     }
     
@@ -250,6 +273,7 @@ export function Customers() {
       {
         addVendorModalForm?<AddVendorModal setAddVendorModalForm={setAddVendorModalForm} handleSubmit={handleSubmit} setSubmitData={setSubmitData} />:null
       }
+      <TimePick/>
       </div>
     </>
   );

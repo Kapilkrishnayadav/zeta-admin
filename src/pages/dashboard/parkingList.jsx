@@ -2,6 +2,7 @@
 import { useEffect,useState } from "react";
 import DataTable from "react-data-table-component"
 // import AddVendorModal from "@/components/AddVendorModal";
+import CopyButton from "@/components/CopyButton";
 import AddVendorModal from "@/components/AddParkingModal";
 import { rating } from "@material-tailwind/react";
 
@@ -38,6 +39,8 @@ export function ParkingList() {
    const [filterRecords, setFilterRecords] = useState([])
    const [filterBy, setFilterBy] = useState("_id");
    const [addVendorModalForm, setAddVendorModalForm] = useState(false)
+
+   
    const [submitData, setSubmitData] = useState({
     
     name: "",
@@ -61,14 +64,15 @@ export function ParkingList() {
     console.log(submitData);
     const {name,lat,long,address,description,rating,opentime,closeTime,userId}=submitData
 
-    if(!name || !lat || !long || !address || !description || !rating || !opentime || !closeTime || !userId)
+    if(!name || !lat || !long || !address || !rating || !opentime || !closeTime || !userId)
     {
       alert("fill all required fields")
       return;
     }
+    // return;
     try {
       // Make POST request to backend API
-      const response = await fetch("https://zeta-4ohz.onrender.com/api/parking-list", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/parking-list`, {
         method: "POST",
         headers: {
           
@@ -97,16 +101,41 @@ export function ParkingList() {
     {
       name:"Parking Id",
       selector: row => row._id,
+      width:"235px",
       sortable:true
     },
     {
+      name:"copy",
+      width:"100px",
+      cell: (row) => (
+    <div  >
+      <CopyButton text={row._id}/>
+    
+    </div>
+  ),
+ 
+ },
+    {
       name:"vendor Id",
       selector: row => row.userId,
+      width:"235px",
       sortable:true
     }, 
     {
+      name:"copy",
+      width:"100px",
+      cell: (row) => (
+    <div  >
+      <CopyButton text={row.userId}/>
+    
+    </div>
+  ),
+ 
+ },
+    {
        name:"name",
        selector: row => row.name,
+       width:"200px",
        sortable:true
      },
      {
@@ -117,11 +146,13 @@ export function ParkingList() {
       {
         name:"opentime",
         selector: row => row.opentime,
+        width:"150px",
         sortable:true
       },
       {
         name:"closeTime",
         selector: row => row.closeTime,
+        width:"150px",
         sortable:true
       },
       {
@@ -132,47 +163,56 @@ export function ParkingList() {
       {
         name:"lat",
         selector: row => row.lat,
+        width:"150px",
         sortable:true
       },
       {
         name:"long",
         selector: row => row.long,
+        width:"150px",
         sortable:true
 
       },
       {
-        name:"Car perhourRate",
+        name:"Car perHourRate",
         selector: row => row.car_perhourRate,
+        width:"200px",
         sortable:true
       },
       {
-        name:"Bike perhourRate",
+        name:"Bike perHourRate",
         selector: row => row.bike_perhourRate,
+        width:"200px",
         sortable:true
       },
       {
         name:"Bus perhourRate",
         selector: row => row.bus_perhourRate,
+        width:"200px",
         sortable:true
       },
       {
         name:"Minitruck perhourRate",
         selector: row => row.miniTruck_perhourRate,
+        width:"200px",width:"200px",
         sortable:true
       },
       {
         name:"HCV perhourRate",
         selector: row => row.HCV_perhourRate,
+        width:"200px",
         sortable:true
       },
       {
         name:"LCV perhourRate",
         selector: row => row.LCV_perhourRate,
+        width:"200px",
         sortable:true
       },
       {
         name:"rating",
         selector: row => row.rating,
+        width:"150px",
         sortable:true
       }
 
@@ -199,7 +239,7 @@ export function ParkingList() {
       const fetchData = async () => {
         try {
           const response = await fetch(
-            "https://zeta-4ohz.onrender.com/api/parking-list",
+            `${import.meta.env.VITE_BACKEND_URL}/api/parking-list`,
              {
               headers: {
                 'Authorization': authHeader
@@ -210,6 +250,7 @@ export function ParkingList() {
             throw new Error("Failed to fetch data");
           }
           const jsonData = await response.json();
+          jsonData.reverse();
           setRecords(jsonData);
           setFilterRecords(jsonData);
           // console.log(jsonData)
@@ -228,7 +269,7 @@ export function ParkingList() {
     const handleDelete = async() => {
       console.log(deleteData);
       try {
-        const response = await fetch('https://zeta-4ohz.onrender.com/api/parking-list', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/parking-list`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

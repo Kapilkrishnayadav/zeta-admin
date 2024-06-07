@@ -26,7 +26,7 @@ export function SignIn() {
     try {
       // console.log(username);
       // console.log(password);
-      const response = await fetch('https://zeta-4ohz.onrender.com/api/super-admin-login', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/super-admin-login`, {
         
         method: 'POST',
         headers: {

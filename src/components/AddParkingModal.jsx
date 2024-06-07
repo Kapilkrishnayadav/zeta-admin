@@ -1,7 +1,41 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
+import TimePick from './TimePick'
 const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => {
     // const [addVendorModalForm, setAddVendorModalForm] = useState(false)
-  
+    const [openHour, setOpenHour] = useState("00");
+   const [openMinute, setOpenMinute] = useState("00");
+   const [openAM, setOpenAm] = useState("AM")
+   const [opentime, setOpenTime] = useState("")
+   
+    const [closeHour, setCloseHour] = useState("00");
+    const [closeMinute, setCloseMinute] = useState("00");
+    const [closeAM, setCloseAm] = useState("AM")
+    const [closeTime, setCloseTime] = useState("")
+    
+   useEffect(() => {
+     setOpenTime(openHour+":"+openMinute+" "+ openAM)
+     setCloseTime(closeHour+":"+closeMinute+" "+ closeAM)
+     
+   }, [openAM,openHour,openMinute,closeAM,closeHour,closeMinute])
+
+   useEffect(() => {
+     setOpenTime(openHour+":"+openMinute+" "+ openAM)
+     setCloseTime(closeHour+":"+closeMinute+" "+ closeAM)
+     setSubmitData(
+      (prev) => (prev = { ...prev, opentime: opentime })
+    )
+    setSubmitData(
+      (prev) =>
+        (prev = { ...prev, closeTime: closeTime})
+    )
+     
+   }, [openAM,openHour,openMinute,closeAM,closeHour,closeMinute])
+    //  const abc=()=>{
+    //    console.log("opentime->"+opentime);
+    //    console.log("closetime->"+closeTime)
+    //   //  console.log(submitData);
+    //  }
+
   return (
     <div>
          <div className="Modal_container flex items-center h-[90vh] overflow-scroll py-8  fixed top-10 left-[25vw]">
@@ -10,6 +44,7 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
               <p className="border-b-2 w-[18rem] border-[#10b981]  mb-8 text-center  text-xl font-bold text-gray-300 capitalize ">
                 Add Parking 
               </p>
+      {/* <button onClick={abc}>abc</button> */}
 
               <div className="flex">
                 <div className="Title__ my-1 mr-8">
@@ -228,7 +263,8 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
                   <label className="text-lg text-gray-300 " htmlFor="title">
                     Open time*
                   </label>
-                  <input
+                  <TimePick setHour={setOpenHour} setMinute={setOpenMinute} setam={setOpenAm}/>
+                  {/* <input
                     onChange={(e) =>
                       setSubmitData(
                         (prev) => (prev = { ...prev, opentime: e.target.value })
@@ -236,10 +272,10 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
                     }
                     id="title"
                     placeholder="Enter Title"
-                    type="text"
+                    type="time"
                     className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
                     required
-                  />
+                  /> */}
                 </div>
 
                     
@@ -250,8 +286,10 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
               <div className="Title__ my-1 mr-8">
                   <label className="text-lg text-gray-300 " htmlFor="title">
                     Close time*
-                  </label>
-                  <input
+                  </label> 
+                  <TimePick setHour={setCloseHour} setMinute={setCloseMinute} setam={setCloseAm}/>
+
+                  {/* <input
                     onChange={(e) =>
                       setSubmitData(
                         (prev) =>
@@ -263,7 +301,7 @@ const AddParkingModal = ({setAddVendorModalForm,handleSubmit,setSubmitData}) => 
                     type="text"
                     className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
                     required
-                  />
+                  /> */}
                 </div>
                 <div className="Title__ my-1 mr-8 ">
                   <label className="text-lg text-gray-300 " htmlFor="title">

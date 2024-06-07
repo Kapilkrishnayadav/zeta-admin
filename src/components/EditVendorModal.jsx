@@ -66,7 +66,7 @@ const EditVendorModal = ({setEditVendorModalForm,handleSubmitEdit,setSubmitEditD
                     }
                     id="title"
                     placeholder="Enter Title"
-                    type="text"
+                    type="date"
                     className="block w-96 px-4 py-2 mt-2 text-gray-800 bg-white border border-[#10b981] rounded-md   focus:outline-none focus:ring"
                     required
                   />
