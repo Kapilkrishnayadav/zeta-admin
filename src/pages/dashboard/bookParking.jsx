@@ -1,6 +1,5 @@
 import React from "react";
 import { useState,useEffect } from "react";
-import { io } from "socket.io-client";
 import DataTable from "react-data-table-component"
 import { data } from "autoprefixer";
 import CopyButton from "@/components/CopyButton";
