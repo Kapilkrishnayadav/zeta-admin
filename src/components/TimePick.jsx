@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import TimePicker from 'react-time-picker';
 
 const TimePick = ({setHour,setMinute,setam}) => {
   
