@@ -52,7 +52,8 @@ export function Vendors() {
      phoneNumber: "",
      gender: "",
      password: "",
-     isVendor: true
+     isVendor: true,
+      fcmToken:"xyz"
   });
   const [submitEditData, setSubmitEditData] = useState({
     
@@ -64,7 +65,7 @@ export function Vendors() {
      phoneNumber: "",
      gender: "",
      password: "",
-     isVendor: true
+     isVendor: true,
   });
   // const [addVendorModal, setaddVendorModal] = useState(false)
    const [addVendorModalForm, setAddVendorModalForm] = useState(false)

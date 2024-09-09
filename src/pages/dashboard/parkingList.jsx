@@ -194,7 +194,7 @@ export function ParkingList() {
       {
         name:"Minitruck perhourRate",
         selector: row => row.miniTruck_perhourRate,
-        width:"200px",width:"200px",
+        width:"200px",
         sortable:true
       },
       {
@@ -304,7 +304,7 @@ export function ParkingList() {
                   >
                       {/* <option value=""  disabled selected hidden>Search on</option> */}
                       <option value="_id">Parking Id</option>
-                      <option value="vendorId">Vendor Id</option>
+                      <option value="userId">Vendor Id</option>
                       <option value="name">Name</option>
                       <option value="address">Address</option>
                       <option value="opentime">Open Time</option>
