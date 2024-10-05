@@ -47,7 +47,7 @@ export function SignIn() {
         // navigate( '/dashboard/home' );
       // }, 1000);
       // console.log('Login successful', data);`
-      window.location.href = "https://zeta-admin.vercel.app/dashboard/bookParking";
+      window.location.href = "http://admin.zetaclear.in/dashboard/bookParking";
     } catch (error) {
       console.log('Invalid username or password');
     }
